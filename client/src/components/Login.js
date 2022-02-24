@@ -1,30 +1,47 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 
 export default function Login() {
-  const emailRef = useRef()
+  const userRef = useRef()
   const passwordRef = useRef()
   const { login } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  const history = useHistory()
+  const [doneFetch, setDoneFetch] =useState(false)
+  const History = useHistory()
+
+  useEffect(() => {
+    if (doneFetch && error.length === 0) {
+      History.push('/')
+    }
+  },[doneFetch, History, error]);
+
+
+
 
   async function handleSubmit(e) {
     e.preventDefault()
-
     try {
       setError("")
       setLoading(true)
-      await login(emailRef.current.value, passwordRef.current.value)
-      history.push("/")
+      setDoneFetch(false)
+
+      let result = await login(userRef.current.value, passwordRef.current.value)
+      if(result.status === 'error'){
+        setError(result.message)
+      }
+
     } catch {
       setError("Failed to log in")
     }
 
+    setDoneFetch(true)
     setLoading(false)
   }
+
+
 
   return (
     <>
@@ -33,9 +50,9 @@ export default function Login() {
           <h2 className="text-center mb-4">Log In</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
+            <Form.Group id="username">
+              <Form.Label>User Name</Form.Label>
+              <Form.Control  ref={userRef} required />
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>

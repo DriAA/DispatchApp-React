@@ -19,10 +19,10 @@ export default function Signup() {
 
 
   useEffect(() => {
-    if (doneFetch) {
+    if (doneFetch && error.length === 0) {
       History.push('/')
     }
-  },[doneFetch, History]);
+  },[doneFetch, History, error]);
 
 
 

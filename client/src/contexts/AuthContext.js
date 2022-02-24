@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react"
-import { getData } from "../api/fetchSignupApi"
+import { getSignup, getLogin } from "../api/fetchSignupApi"
 const AuthContext = React.createContext()
 
 
@@ -20,13 +20,21 @@ export function AuthProvider({ children }) {
       password: password
     }
 
-    let data =  await getData(user)
-    setCurrentUser(data.user)
+    let data =  await getSignup(user)
+    console.log("Signup API: ", data)
+    setCurrentUser(data.response)
     return data
   }
 
-  function login(email, password) {
-    return (email, password)
+  async function login(username, password) {
+    let user = {
+      username: username,
+      password: password
+    }
+    let data =  await getLogin(user)
+    console.log("Login API: ", data)
+    setCurrentUser(data.response)
+    return data
   }
 
   function logout() {

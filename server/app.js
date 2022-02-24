@@ -73,15 +73,8 @@ app.use((req, res, next) => {
 
 app.get('/api', (req, res) =>{
     console.log("Router Hit!")
-    res.send(JSON.stringify({ greeting: `Hello!` }));
+    res.send(JSON.stringify({ greeting: `Welcome to our API!` }));
 })
-
-app.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: "/login" }), (req, res) => {
-    req.flash('success', 'welcome back')
-    const redirectUrl = req.session.returnTo || `/app/`;
-    return res.redirect(redirectUrl);
-})
-
 
 app.post('/api/register', async (req, res) => {
     await User.deleteMany({}).then(()=>{
@@ -106,8 +99,7 @@ app.post('/api/register', async (req, res) => {
                 user: {
                     id: registeredUser._id,
                     username: registeredUser.username,
-                    email: registeredUser.email
-
+                    email: registeredUser.email,
                 } 
             }
         ));
@@ -120,6 +112,31 @@ app.post('/api/register', async (req, res) => {
         ));
     }
 })
+
+
+
+
+app.post('/api/login', passport.authenticate('local', { failureRedirect: '/api/failureLogin'}), async (req, res) => {
+    console.log("Login API was called: ", req.body)
+    const {username} = req.body
+    const loggedUser = await User.findOne({username: username})
+    res.send(JSON.stringify(
+        { 
+            status: `successs`,
+            response: loggedUser
+        }
+    ));
+})
+
+
+
+app.get('/api/failureLogin', function(req, res){
+    res.send(JSON.stringify({
+        status: 'error',
+        message: 'email or password was incorrect.'
+    }))
+})
+
 
 // Server Start up.
 let port = 5000;
