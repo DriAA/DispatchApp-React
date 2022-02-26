@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { getSignup, getLogin } from "../api/fetchSignupApi"
 const AuthContext = React.createContext()
 
@@ -12,6 +12,11 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState()
 
+
+  useEffect(()=>{
+    setCurrentUser(JSON.parse(localStorage.getItem('user')))      
+  },[])
+  
   async function signup(username, email, password) {
 
     let user = {
@@ -22,8 +27,17 @@ export function AuthProvider({ children }) {
 
     let data =  await getSignup(user)
     console.log("Signup API: ", data)
-    setCurrentUser(data.response)
+    if(data.status === 'Success'){
+      localStorage.setItem('user', JSON.stringify(data.user))
+      setCurrentUser(JSON.parse(localStorage.getItem('user')))      
+    }
     return data
+  }
+
+
+  async function assignUser(){
+    await setCurrentUser(JSON.parse(localStorage.getItem('user')))      
+    return currentUser
   }
 
   async function login(username, password) {
@@ -33,11 +47,16 @@ export function AuthProvider({ children }) {
     }
     let data =  await getLogin(user)
     console.log("Login API: ", data)
-    setCurrentUser(data.response)
+    if(data.status === 'Success'){
+      localStorage.setItem('user', JSON.stringify(data.user))
+      setCurrentUser(JSON.parse(localStorage.getItem('user')))      
+    }
     return data
   }
 
   function logout() {
+    setCurrentUser()
+    localStorage.setItem('user',null)
     return 'logged out'
   }
 
@@ -48,6 +67,7 @@ export function AuthProvider({ children }) {
     login,
     signup,
     logout,
+    assignUser
   }
 
   return (

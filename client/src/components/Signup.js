@@ -24,26 +24,19 @@ export default function Signup() {
     }
   },[doneFetch, History, error]);
 
-
-
-
-
-
-
-
-
-
   async function handleSubmit(e) {
     e.preventDefault()
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
     }
+    
+
     try {
       setError("")
       setLoading(true)
       setDoneFetch(false)
       let result = await signup(userRef.current.value, emailRef.current.value, passwordRef.current.value)
-      console.log('Result: ', result)
+      console.log('Signup.js:', result)
     } catch {
       setError("Failed to create an account")
     }

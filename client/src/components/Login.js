@@ -18,9 +18,6 @@ export default function Login() {
     }
   },[doneFetch, History, error]);
 
-
-
-
   async function handleSubmit(e) {
     e.preventDefault()
     try {
@@ -32,7 +29,7 @@ export default function Login() {
       if(result.status === 'error'){
         setError(result.message)
       }
-
+      console.log(result)
     } catch {
       setError("Failed to log in")
     }

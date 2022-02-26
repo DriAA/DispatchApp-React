@@ -122,8 +122,12 @@ app.post('/api/login', passport.authenticate('local', { failureRedirect: '/api/f
     const loggedUser = await User.findOne({username: username})
     res.send(JSON.stringify(
         { 
-            status: `successs`,
-            response: loggedUser
+            status: `Success`,
+            user: {
+                id: loggedUser._id,
+                username: loggedUser.username,
+                email: loggedUser.email
+            }
         }
     ));
 })
