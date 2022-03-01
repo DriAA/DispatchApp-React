@@ -1,0 +1,30 @@
+.auth-cover{
+    background: rgba(0, 0, 0, .3) url('../../Image/FeatureOne.jpg');
+    background-blend-mode: darken;
+    background-position: center;
+    background-size: cover;
+    background-repeat: none;
+    width: 100%;
+    height:100%;
+    color: white;
+    padding: 5em;
+}
+
+
+
+@media screen and (min-width: 1000px) {
+    .ControlWidth{
+        width: 50%;
+    }
+  }
+  @media screen and (max-width: 1000px) {
+    .ControlWidth{
+        width: 75%;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .ControlWidth{
+        width: 100%;
+    }
+  }

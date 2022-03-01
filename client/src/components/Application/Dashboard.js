@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { Card, Button, Alert } from "react-bootstrap"
-import { useAuth } from "../contexts/AuthContext"
+import { useAuth } from "../../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+import NavigationBar from '../NavigationBar'
 
 export default function Dashboard() {
   const [error, setError] = useState("")
@@ -22,7 +23,6 @@ export default function Dashboard() {
 
   async function handleLogout() {
     setError("")
-
     try {
       await logout()
       history.push("/login")
@@ -69,6 +69,7 @@ export default function Dashboard() {
 
   return (
     <>
+    <NavigationBar links={[{link:'/app/loads', title:'Loads'},{link:'/app/drivers', title:'Drivers'},{link:'/app/financials',title:'Financials'},{link:'/app/notifications', title:'Notifications'}]} authActive={true}/>
     {handleDashboard()}
     </>
   )

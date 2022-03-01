@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
-import { useAuth } from "../contexts/AuthContext"
+import { Form, Button, Card, Alert, Row, Col, Container } from "react-bootstrap"
+import { useAuth } from "../../contexts/AuthContext"
 import { Link } from "react-router-dom"
 import { useHistory } from "react-router-dom"
 
@@ -20,7 +20,7 @@ export default function Signup() {
 
   useEffect(() => {
     if (doneFetch && error.length === 0) {
-      History.push('/')
+      History.push('/app/')
     }
   },[doneFetch, History, error]);
 
@@ -46,8 +46,11 @@ export default function Signup() {
   }
 
   return (
-    <>
-      <Card>
+    <div style={{height:'100vh', scrollBehavior:'none'}}>
+    <Row xs={1} md={2} className="g-4 m-0">
+        <Col className='border d-flex align-items-center justify-content-center' style={{height:'100vh'}}>
+        <Container>
+        <Card  className="m-auto ControlWidth">
         <Card.Body>
           <h2 className="text-center mb-4">Sign Up</h2>
           {error && <Alert variant="danger">{error}</Alert>}
@@ -74,10 +77,17 @@ export default function Signup() {
             </Button>
           </Form>
         </Card.Body>
-      </Card>
-      <div className="w-100 text-center mt-2">
-        Already have an account? <Link to="/login">Log In</Link>
-      </div>
-    </>
+        </Card>
+        <div className="w-100 text-center mt-2">
+          Already have an account? <Link to="/login">Log In</Link> 
+          <Link className="d-block" to="/">Return to Home Page</Link>
+        </div>
+
+        </Container>
+    </Col>
+    <Col className="auth-cover m-0 d-none d-md-block" hidden-xs style={{height:'100vh'}}>
+    </Col>
+  </Row>
+</div>
   )
 }
