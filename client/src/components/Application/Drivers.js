@@ -16,7 +16,7 @@ function Drivers(props){
                         <h3>All Drivers</h3>
                     </Col>
                     <Col xs={12} md={6} lg={4} className="text-md-left text-lg-right m-auto">
-                        <a href="/app/" className="btn btn-primary d-block d-md-inline">Create Driver</a>
+                        <a href="/app/drivers/new" className="btn btn-primary d-block d-md-inline">Create Driver</a>
                     </Col>
                     <Col xs={12} md={6} lg={4} className='m-auto'>
                     <Form>

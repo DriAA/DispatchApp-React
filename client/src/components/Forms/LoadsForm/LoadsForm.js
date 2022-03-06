@@ -1,6 +1,6 @@
 import React from 'react'
 import NavigationBar from '../../NavigationBar'
-import { Card, Container, Form, Col, Button, Row } from 'react-bootstrap'
+import { Card, Container, Form, Col, Row } from 'react-bootstrap'
 
 
 function LoadForm(props){
