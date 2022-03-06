@@ -3,7 +3,6 @@ import { AuthProvider } from "../contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import PrivateRoute from "./PrivateRoute"
 import ForgotPassword from "./ForgotPassword"
-import UpdateProfile from "./UpdateProfile"
 
 // Application
 import Dashboard from "./Application/Dashboard"
@@ -23,8 +22,8 @@ import PricingPage from "./LandingPage/PricingPage/PricingPage"
 import Login from "./Auth/Login"
 import Signup from "./Auth/Signup"
 
-import Hello from './Hello'
-
+// Forms
+import LoadForm from "./Forms/Loads/LoadsForm"
 
 function App(){
   return (
@@ -33,12 +32,13 @@ function App(){
       <Switch>
         {/* Application */}
         <PrivateRoute exact path="/app/" component={Dashboard} />
-        <PrivateRoute path='/app/loads' component={Loads}/>
+        <PrivateRoute exact path='/app/loads/' component={Loads}/>
+        <PrivateRoute exact path='/app/loads/new' component={LoadForm} />
         <PrivateRoute path='/app/drivers' component={Drivers}/>
-        <PrivateRoute path='/app/loads' component={Financials}/>
-        <PrivateRoute path='/app/loads' component={Notifications}/>
+        <PrivateRoute path='/app/financials' component={Financials}/>
+        <PrivateRoute path='/app/notifications' component={Notifications}/>
 
-        <Route exact path='/tracking/:loadNumber' component={Hello}/>
+        <Route exact path='/tracking/:loadNumber' component={JumbotronPage}/>
         <Route exact path="/" component={JumbotronPage} />
         <Route exact path="/features" component={FeaturesPage} />
         <Route exact path="/pricing" component={PricingPage} />

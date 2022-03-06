@@ -1,0 +1,10 @@
+.card-gutter{
+    margin: 2em 1em 1em 1em;
+    height: 325px;
+}
+
+.overflow{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+

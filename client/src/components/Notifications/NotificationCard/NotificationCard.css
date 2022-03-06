@@ -1,0 +1,7 @@
+.dark-on-hover:hover {
+    filter: brightness(0.97);
+}
+
+.dark-on-hover{
+    filter: brightness(1);
+}

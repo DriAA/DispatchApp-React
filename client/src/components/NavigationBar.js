@@ -49,7 +49,7 @@ function NavigationBar(props){
     return(
         <Navbar bg="light" expand="lg">
             <Container>
-                <Navbar.Brand href="/">Dispatch App</Navbar.Brand>
+                <Navbar.Brand href="/app/">Dispatch App</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse>
                 <Nav className="mr-auto">
