@@ -9,7 +9,6 @@ const Schema = mongoose.Schema
 const Loadschema = new Schema({
 
     loadID: String,
-    loadPO: String,
     broker: {
         id: {
             type: Schema.Types.ObjectId,
@@ -85,9 +84,6 @@ const Loadschema = new Schema({
 
     ],
     note: String,
-    postCreated: String,
-    postViewed: String,
-    postEdited: String
 });
 
 

@@ -23,7 +23,7 @@ import Login from "./Auth/Login"
 import Signup from "./Auth/Signup"
 
 // Forms
-import LoadForm from "./Forms/Loads/LoadsForm"
+import LoadsForm from "./Forms/LoadsForm/LoadsForm"
 import DriverForm from "./Forms/DriverForm/DriverForm"
 
 function App(){
@@ -34,7 +34,7 @@ function App(){
         {/* Application */}
         <PrivateRoute exact path="/app/" component={Dashboard} />
         <PrivateRoute exact path='/app/loads/' component={Loads}/>
-        <PrivateRoute exact path='/app/loads/new' component={LoadForm} />
+        <PrivateRoute exact path='/app/loads/new' component={LoadsForm} />
         <PrivateRoute exact path='/app/drivers' component={Drivers}/>
         <PrivateRoute exact path='/app/drivers/new' component={DriverForm}/>
         <PrivateRoute path='/app/financials' component={Financials}/>
