@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
-import { getSignup, getLogin } from "../api/fetchSignupApi"
+import { getSignup, getLogin, getDriver } from "../api/fetchSignupApi"
 const AuthContext = React.createContext()
 
 
@@ -39,6 +39,10 @@ export function AuthProvider({ children }) {
     await setCurrentUser(JSON.parse(localStorage.getItem('user')))      
     return currentUser
   }
+  
+
+
+
 
   async function login(username, password) {
     let user = {
@@ -53,6 +57,20 @@ export function AuthProvider({ children }) {
     }
     return data
   }
+
+  async function addDriver(driver){
+    console.log("Adding Driver...")
+    let data = await getDriver(driver)
+    if(data.status === 'Success'){
+      localStorage.setItem('user', JSON.stringify(data.user))
+      setCurrentUser(JSON.parse(localStorage.getItem('user')))      
+    }
+    return data
+  }
+
+
+
+
 
   function logout() {
     setCurrentUser()

@@ -32,5 +32,22 @@ export const getLogin=(user)=>{
     (error) => {
         return error
     })
+}
 
+export const getDriver =(driver)=>{
+    return fetch("/api/driver/new",{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(driver)
+    })
+    .then(res => res.json())
+    .then(
+    (result) => { 
+        return result
+    },
+    (error) => {
+        return error
+    })
 }

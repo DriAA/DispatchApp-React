@@ -15,6 +15,8 @@ const { rawListeners } = require('process');
 
 // Require Models
 const User = require('./models/user');
+const Driver = require('./models/driver')
+
 
 // Mongoose Connection
 mongoose.connect('mongodb://localhost:27017/DispatchAppFullStack', {
@@ -130,6 +132,36 @@ app.post('/api/login', passport.authenticate('local', { failureRedirect: '/api/f
             }
         }
     ));
+})
+
+app.post('/api/driver/new',async(req,res)=>{
+    const  user = await User.findById({_id: req.body._id})
+    const newDriver = new Driver(req.body.driver)
+    console.log("New Driver: ", newDriver)
+    newDriver.save()
+
+    if(user){
+        console.log("User Was Found")
+        user.driver.push({id: newDriver._id})
+        user.save()
+
+
+        updatedUser = await User.findById({_id: req.body._id}).populate('driver.id')
+        return res.send(JSON.stringify(
+            { 
+                status: `Success`,
+                newUser: updatedUser
+            }
+        ));
+    }else{
+        console.log("User Was not Found")
+        return res.send(JSON.stringify(
+            { 
+                status: `Error`,
+                message: "No User Was Found"
+            }
+        ));
+    }
 })
 
 

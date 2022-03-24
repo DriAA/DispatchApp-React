@@ -8,8 +8,6 @@ const Schema = mongoose.Schema
 const DriverSchema = new Schema({
     firstName: String,
     lastName: String,
-    DOB: String,
-    image: String,
     mobile: String,
     email: String,
     address:{
@@ -20,7 +18,6 @@ const DriverSchema = new Schema({
         postal: String,
         country: String
     },
-    liscenseNumber: String,
     employeeNumber: String,
     truck: {
         number: String
@@ -29,8 +26,6 @@ const DriverSchema = new Schema({
         equipment: String, 
         number: String
     },
-    joinedCompany: String
-
 });
 
 
